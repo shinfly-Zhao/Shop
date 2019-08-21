@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
@@ -28,7 +29,8 @@ SECRET_KEY = 'y@g5qi!6$h9)_4a6omzztigy)7x@mcf1$*=ab#we(0=xotq3e@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -42,7 +44,6 @@ INSTALLED_APPS = [
     "rest_framework_jwt",
     "rest_framework",
     "crispy_forms",
-    'rest_framework',
     'django_filters',
     'corsheaders',  # 解决跨域
     'rest_framework.authtoken',  # 用户权限 -- 会创建表
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'channels',
     'DjangoUeditor',
     'social_django',
+
 
 ]
 
@@ -65,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Shop.urls'
+
+
 
 TEMPLATES = [
     {
@@ -91,11 +95,15 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "shop",
+        "USER": "root",
+        "PASSWORD": "mysql",
+        "HOST": "60.205.214.205",
+        "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
+        # 第三方登陆
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
