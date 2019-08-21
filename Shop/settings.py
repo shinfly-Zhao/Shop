@@ -101,7 +101,6 @@ DATABASES = {
         "PASSWORD": "mysql",
         "HOST": "60.205.214.205",
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
-        # 第三方登陆
     }
 }
 
