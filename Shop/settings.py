@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'corsheaders',  # 解决跨域
     'rest_framework.authtoken',  # 用户权限 -- 会创建表
     'gunicorn',
-    'dwebsocket',
-    'channels',
     'DjangoUeditor',
     'social_django',
 
@@ -67,7 +65,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Shop.urls'
-
+CORS_ORIGIN_ALLOW_ALL = True  # 跨域
 
 
 TEMPLATES = [
@@ -93,16 +91,7 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "shop",
-        "USER": "root",
-        "PASSWORD": "mysql",
-        "HOST": "60.205.214.205",
-        "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -141,3 +130,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = "/media/"
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "extra_apps", 'xadmin', 'static')
