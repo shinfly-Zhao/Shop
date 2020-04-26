@@ -5,7 +5,6 @@
 """
 import requests
 import json
-from Shop.settings import MPBILEAPIKEY
 
 
 class YunPian(object):

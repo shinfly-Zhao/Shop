@@ -3,7 +3,7 @@
 @time:2019/09/05
 @filename:permissions.py
 """
-# 特定权限验证
+# 公共权限验证
 from rest_framework import permissions
 from users.models import Merchants
 
@@ -53,26 +53,28 @@ class UserIsAdminOrXadmin(permissions.BasePermission):
 class BaseUrlPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        # 判断路由权限
-        try:
-            path = request.META["PATH_INFO"].strip("")
-            pathList = path.split("/")
-            shopId = pathList[1]
-            shop = Merchants.objects.filter(number =int(shopId))
-            if shop:
-                return True
-            else:
-                return False
+        """
+        Return `True` if permission is granted, `False` otherwise.
+        """
+        return False
 
-        except:
-            return False
-
-
-class IsOnlyMyselfCan(permissions.BasePermission):
-    """
-    资源是否属于当前用户 属于放行/不放行
-    """
+    # def has_object_permission(self, request, view, obj):
+    #     """
+    #     Return `True` if permission is granted, `False` otherwise.
+    #     """
+    #     return True
+    # 判断商户门店号是否有效(基本)
     def has_object_permission(self, request, view, obj):
+        return True
+        # try:
+        #     path = request.META["PATH_INFO"].strip("")
+        #     pathList = path.split("/")
+        #     shopId = pathList[1]
+        #     shop = Merchants.objects.filter(number =int(shopId))
+        #     if shop:
+        #         return True
+        #     else:
+        #         return False
+        # except:
+        #     return False
 
-        # 否则只有当前用户可以修改编辑对象
-        return obj.user == request.user.id
